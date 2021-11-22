@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label>Contenido embebido *</label>
                             <!--old, recordar dato a validar o so no hay imprimir lo que esta en la BD -->
-                            <textarea name="iframe"  class="form-control" required>{{ old('iframe',$post->iframe) }}</textarea>
+                            <textarea name="iframe"  class="form-control" >{{ old('iframe',$post->iframe) }}</textarea>
                         </div>
                         <div class="form-group">
                             <!-- comprobacion de token formilario seguro-->

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+/** importar clase para trabajar la eliminacion de la imagen*/
+use Illuminate\Support\Facades\Storage;
 /**
  * remplazar request por defecto por el que creamos
 *use Illuminate\Http\Request;
@@ -87,10 +89,13 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         //optrener posts y actualizarlo
+            //editamos
         $post->update($request->all());
         //comprovar si hay imagen a eliminar
         if($request->file('file')){
             // eliminar imagen
+            Storage::disk('public')->delete($post->image);
+            //actualizar archivo de imagen
             $post->image = $request->file('file')->store('posts','public');
             $post->save();
         }
@@ -106,7 +111,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //optener post i eliminar
+        // eliminar imagen
+        Storage::disk('public')->delete($post->image);
+        //optener post y eliminar
         $post->delete();
         //mensaje en status
         return back()->with('status','Eliminado con exito');

@@ -38,4 +38,11 @@ class Post extends Model
     {
         return substr($this->body,0,140);
     }
+    //metodo para el obtener imagen
+    //storage_link general enlace simbolico con artisan
+    public function getGetImageAttribute()
+    {
+        if($this->image)
+            return url("storage/$this->image");
+    }
 }
