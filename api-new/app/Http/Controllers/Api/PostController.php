@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Post;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+//agregar el recuaest utilizado para el test
+use App\Http\Requests\Post as PostRequests;
 
 class PostController extends Controller
 {
+    //refactorizacion de codigo
+    protected $post;
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +32,11 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequests $request)
     {
-        //
+        $post = $this->post->create($request->all());
+
+        return response()->json($post,201);
     }
 
     /**
@@ -47,7 +57,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequests $request, Post $post)
     {
         //
     }

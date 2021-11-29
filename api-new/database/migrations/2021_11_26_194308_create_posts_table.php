@@ -15,6 +15,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            //creacion del campo titutlo que esta en la prueba
+            $table->string('title');
+
             $table->timestamps();
         });
     }
